@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Fare Prediction Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+        }
+        .prediction {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+        .details {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+        .details h2 {
+            margin-bottom: 1.5rem;
+            color: #34495e;
+            font-size: 1.8rem;
+        }
+        .details ul {
+            list-style: none;
+        }
+        .details li {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            font-size: 1.2rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .details li:last-child {
+            border-bottom: none;
+        }
+        .details li strong {
+            display: inline-block;
+            width: 180px;
+            color: #34495e;
+        }
+        .button-group {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+        }
+        .back-btn {
+            background: #3498db;
+        }
+        .back-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .print-btn {
+            background: #2ecc71;
+        }
+        .print-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .button-group {
+                display: none;
+            }
+            .prediction, .details {
+                border: 1px solid #ddd;
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+            .prediction {
+                font-size: 2rem;
+                padding: 1.5rem;
+            }
+            .details li strong {
+                width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Fare Prediction Results</h1>
+        <div class="prediction">
+            Predicted Flight Fare: ₹{{ "%.2f"|format(prediction) }}
+        </div>
+        <div class="details">
+            <h2>Flight Details:</h2>
+            <ul>
+                <li><strong>Airline:</strong> {{ input_data.airline }}</li>
+                <li><strong>Source City:</strong> {{ input_data.source_city }}</li>
+                <li><strong>Destination City:</strong> {{ input_data.destination_city }}</li>
+                <li><strong>Departure Time:</strong> {{ input_data.departure_time }}</li>
+                <li><strong>Arrival Time:</strong> {{ input_data.arrival_time }}</li>
+                <li><strong>Stops:</strong> {{ input_data.stops }}</li>
+                <li><strong>Class:</strong> {{ input_data.class }}</li>
+            </ul>
+        </div>
+        <div class="button-group">
+            <a href="/" class="btn back-btn">New Prediction</a>
+            <button onclick="window.print()" class="btn print-btn">Print Results</button>
+        </div>
+    </div>
+</body>
+</html>

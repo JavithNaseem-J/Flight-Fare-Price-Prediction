@@ -1,0 +1,14 @@
+COLUMNS:
+  airline: string
+  source_city: string
+  departure_time: string
+  stops: string
+  arrival_time: string
+  destination_city: string
+  class: string
+  days_left: int
+  price: int
+
+TARGET_COLUMN:
+  name: price
+ 

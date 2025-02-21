@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Fare Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        .result.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            display: block;
+        }
+
+        .result.error {
+            background: #ffebee;
+            color: #c62828;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Fare Prediction</h1>
+        <form id="predictionForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="airline">Airline</label>
+                    <select id="airline" required>
+                        <option value="">Select Airline</option>
+                        <option value="SpiceJet">SpiceJet</option>
+                        <option value="AirAsia">AirAsia</option>
+                        <option value="Vistara">Vistara</option>
+                        <option value="GO_FIRST">GO FIRST</option>
+                        <option value="Indigo">Indigo</option>
+                        <option value="Air_India">Air India</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="class">Class</label>
+                    <select id="class" required>
+                        <option value="">Select Class</option>
+                        <option value="Economy">Economy</option>
+                        <option value="Business">Business</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="source_city">Source City</label>
+                    <select id="source_city" required>
+                        <option value="">Select Source City</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Chennai">Chennai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="destination_city">Destination City</label>
+                    <select id="destination_city" required>
+                        <option value="">Select Destination City</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Delhi">Delhi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="departure_time">Departure Time</label>
+                    <select id="departure_time" required>
+                        <option value="">Select Departure Time</option>
+                        <option value="Evening">Evening</option>
+                        <option value="Early_Morning">Early Morning</option>
+                        <option value="Morning">Morning</option>
+                        <option value="Afternoon">Afternoon</option>
+                        <option value="Night">Night</option>
+                        <option value="Late_Night">Late Night</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="arrival_time">Arrival Time</label>
+                    <select id="arrival_time" required>
+                        <option value="">Select Arrival Time</option>
+                        <option value="Night">Night</option>
+                        <option value="Morning">Morning</option>
+                        <option value="Early_Morning">Early Morning</option>
+                        <option value="Afternoon">Afternoon</option>
+                        <option value="Evening">Evening</option>
+                        <option value="Late_Night">Late Night</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="stops">Stops</label>
+                <select id="stops" required>
+                    <option value="">Select Stops</option>
+                    <option value="zero">Zero</option>
+                    <option value="one">One</option>
+                    <option value="two_or_more">Two or More</option>
+                </select>
+            </div>
+
+            <button type="submit">Predict Fare</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Validate departure and arrival times
+            const departureTime = document.getElementById('departure_time').value;
+            const arrivalTime = document.getElementById('arrival_time').value;
+            
+            if (departureTime === arrivalTime) {
+                const resultDiv = document.getElementById('result');
+                resultDiv.className = 'result error';
+                resultDiv.textContent = 'Departure time and arrival time cannot be the same.';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            // Show loading message in result div
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result';
+            resultDiv.textContent = 'Processing your request...';
+            resultDiv.style.display = 'block';
+            
+            const formData = new FormData();
+            formData.append('airline', document.getElementById('airline').value);
+            formData.append('source_city', document.getElementById('source_city').value);
+            formData.append('departure_time', departureTime);
+            formData.append('stops', document.getElementById('stops').value);
+            formData.append('arrival_time', arrivalTime);
+            formData.append('destination_city', document.getElementById('destination_city').value);
+            formData.append('class', document.getElementById('class').value);
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = data.error;
+                } else if (data.redirect) {
+                    // Redirect to the results page
+                    window.location.href = data.redirect;
+                    return;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = 'An error occurred while making the prediction.';
+            }
+        });
+
+        // Prevent selecting same city for source and destination
+        document.getElementById('source_city').addEventListener('change', function() {
+            const destSelect = document.getElementById('destination_city');
+            Array.from(destSelect.options).forEach(option => {
+                option.disabled = option.value === this.value && option.value !== '';
+            });
+        });
+
+        document.getElementById('destination_city').addEventListener('change', function() {
+            const sourceSelect = document.getElementById('source_city');
+            Array.from(sourceSelect.options).forEach(option => {
+                option.disabled = option.value === this.value && option.value !== '';
+            });
+        });
+
+        // Prevent selecting same arrival and departure times
+        document.getElementById('departure_time').addEventListener('change', function() {
+            const arrivalSelect = document.getElementById('arrival_time');
+            Array.from(arrivalSelect.options).forEach(option => {
+                option.disabled = option.value === this.value && option.value !== '';
+            });
+        });
+
+        document.getElementById('arrival_time').addEventListener('change', function() {
+            const departureSelect = document.getElementById('departure_time');
+            Array.from(departureSelect.options).forEach(option => {
+                option.disabled = option.value === this.value && option.value !== '';
+            });
+        });
+    </script>
+</body>
+</html>
