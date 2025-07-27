@@ -6,7 +6,7 @@ import numpy as np
 import zipfile
 import joblib
 import json
-import gdown
+import gdown # type: ignore
 import mlflow
 import mlflow.sklearn
 import dagshub

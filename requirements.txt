@@ -20,6 +20,7 @@ gdown
 ydata-profiling
 ipywidgets
 dvc-s3
+shap
 -e .
 
 

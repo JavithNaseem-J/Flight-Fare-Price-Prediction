@@ -22,4 +22,3 @@ try:
     print("Prediction:", prediction)
 except Exception as e:
     print("Error during prediction:", str(e))
-    print('')
