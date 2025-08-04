@@ -1,4 +1,4 @@
-from src.mlproject.pipeline.predictionpipeline import PredictionPipeline
+from src.FareFinder.pipeline.predictionpipeline import PredictionPipeline
 import pandas as pd
 
 sample_data = {

@@ -1,0 +1,38 @@
+artifacts_root: artifacts
+
+ingestion:
+  root_dir: artifacts/ingestion
+  source_id: 1omU8P37VwIPLuOonbLL5qWYKleqpW2v1
+  local_data_file: artifacts/ingestion/data.zip
+  unzip_dir: artifacts/ingestion
+
+validation:
+  root_dir: artifacts/validation
+  unzip_data_dir: artifacts/ingestion/flight-fare-data.csv
+  status_file: artifacts/validation/status.json
+
+cleaning:
+  root_dir: artifacts/cleaning
+  file_status: artifacts/validation/status.json
+  input_data: artifacts/ingestion/flight-fare-data.csv
+  cleaned_file: artifacts/cleaning/cleaned_flight_data.csv
+
+transformation:
+  root_dir: artifacts/transformation
+  data_path: artifacts/cleaning/cleaned_flight_data.csv
+  target_column: Total Fare
+  preprocessor_path: artifacts/transformation/preprocessor.pkl
+  label_encoder : artifacts/transformation/label_encoders.pkl
+
+trainer:
+  root_dir: artifacts/trainer
+  train_data_path: artifacts/transformation/train_processed.npy
+  test_data_path: artifacts/transformation/test_processed.npy
+  model_name: model.joblib
+
+evaluation:
+  root_dir: artifacts/evaluation
+  model_path: artifacts/trainer/model.joblib
+  test_raw_data: artifacts/transformation/test.csv
+  metric_file_path: artifacts/evaluation/metrics.json
+  preprocessor_path: artifacts/transformation/preprocessor.pkl

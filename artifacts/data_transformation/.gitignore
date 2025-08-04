@@ -1,6 +1,0 @@
-/train.csv
-/test.csv
-/train_processed.npy
-/test_processed.npy
-/preprocessor.pkl
-/label_encoders.pkl

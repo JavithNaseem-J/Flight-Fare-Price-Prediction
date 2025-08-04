@@ -6,7 +6,7 @@ import os
 import uvicorn
 import pandas as pd
 import json
-from src.mlproject.pipeline.predictionpipeline import PredictionPipeline
+from src.FareFinder.pipeline.predictionpipeline import PredictionPipeline
 
 app = FastAPI()
 

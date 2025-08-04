@@ -1,289 +1,100 @@
 schema: '2.0'
 stages:
-  data_ingestion:
-    cmd: python main.py --stage data_ingestion
+  data_pipeline:
+    cmd: python main.py --stage data_pipeline
     deps:
-    - path: config/config.yaml
+    - path: config_file/config.yaml
       hash: md5
-      md5: c4ad7f3fecd15cdacc1b0d3d5eec0b1a
-      size: 1523
-    - path: main.py
+      md5: 16f00f7c647854f9d0241a09fb078574
+      size: 1306
+    - path: config_file/schema.yaml
       hash: md5
-      md5: 2f1c8f73b976ac62d088ddcae3e63442
-      size: 2324
-    - path: src/mlproject/components/component.py
+      md5: 9481042344538e679af1fc19cfe316ed
+      size: 1091
+    - path: src/FareFinder/config/data_config.py
       hash: md5
-      md5: 36e1512ba46ad6bf53d4c2803d633a2b
-      size: 18850
-    - path: src/mlproject/config/config.py
+      md5: 516486a50c577e1fbf84cf56cd4b689e
+      size: 2972
+    - path: src/FareFinder/pipeline/data_pipeline.py
       hash: md5
-      md5: 6a4b79cd83a496df723bcb8c92073baf
-      size: 4679
-    - path: src/mlproject/entities/config_entity.py
-      hash: md5
-      md5: 07e32a1a9ca622493f52efc9b22e683b
-      size: 1328
+      md5: 51224175e715f984e413281fa9abdc83
+      size: 786
     outs:
-    - path: artifacts/data_ingestion
+    - path: artifacts/ingestion/
       hash: md5
       md5: fd38fe4250b03a99358d09336ec134f9.dir
       size: 17192085
       nfiles: 2
-  data_validation:
-    cmd: python main.py --stage data_validation
-    deps:
-    - path: artifacts/data_ingestion/flight-fare-data.csv
-      hash: md5
-      md5: 749fd63d23e6ce8992e8e5690f612fc9
-      size: 14143853
-    - path: config/config.yaml
-      hash: md5
-      md5: c4ad7f3fecd15cdacc1b0d3d5eec0b1a
-      size: 1523
-    - path: main.py
-      hash: md5
-      md5: 2f1c8f73b976ac62d088ddcae3e63442
-      size: 2324
-    - path: schema.yaml
-      hash: md5
-      md5: 7b9b414fe4d18cc449c7c0781416a7ac
-      size: 1096
-    - path: src/mlproject/components/component.py
-      hash: md5
-      md5: 36e1512ba46ad6bf53d4c2803d633a2b
-      size: 18850
-    - path: src/mlproject/config/config.py
-      hash: md5
-      md5: 6a4b79cd83a496df723bcb8c92073baf
-      size: 4679
-    - path: src/mlproject/entities/config_entity.py
-      hash: md5
-      md5: 07e32a1a9ca622493f52efc9b22e683b
-      size: 1328
-    outs:
-    - path: artifacts/data_validation/status.json
+    - path: artifacts/validation/status.json
       hash: md5
       md5: 86e6a2f694c57a675b3e2da6b95ff9ba
       size: 23
-  data_cleaning:
-    cmd: python main.py --stage data_cleaning
+  feature_pipeline:
+    cmd: python main.py --stage feature_pipeline
     deps:
-    - path: artifacts/data_ingestion/flight-fare-data.csv
+    - path: config_file/config.yaml
       hash: md5
-      md5: 749fd63d23e6ce8992e8e5690f612fc9
-      size: 14143853
-    - path: artifacts/data_validation/status.json
-      hash: md5
-      md5: 86e6a2f694c57a675b3e2da6b95ff9ba
-      size: 23
-    - path: config/config.yaml
-      hash: md5
-      md5: c4ad7f3fecd15cdacc1b0d3d5eec0b1a
-      size: 1523
-    - path: main.py
-      hash: md5
-      md5: 2f1c8f73b976ac62d088ddcae3e63442
-      size: 2324
-    - path: schema.yaml
-      hash: md5
-      md5: 7b9b414fe4d18cc449c7c0781416a7ac
-      size: 1096
-    - path: src/mlproject/components/component.py
-      hash: md5
-      md5: 36e1512ba46ad6bf53d4c2803d633a2b
-      size: 18850
-    - path: src/mlproject/config/config.py
-      hash: md5
-      md5: 6a4b79cd83a496df723bcb8c92073baf
-      size: 4679
-    - path: src/mlproject/entities/config_entity.py
-      hash: md5
-      md5: 07e32a1a9ca622493f52efc9b22e683b
-      size: 1328
-    outs:
-    - path: artifacts/data_cleaning/cleaned_flight_data.csv
-      hash: md5
-      md5: 92727bbaafd59d8cb94a110d73df05ff
-      size: 5182498
-  data_transformation:
-    cmd: python main.py --stage data_transformation
-    deps:
-    - path: artifacts/data_cleaning/cleaned_flight_data.csv
-      hash: md5
-      md5: 92727bbaafd59d8cb94a110d73df05ff
-      size: 5182498
-    - path: config/config.yaml
-      hash: md5
-      md5: c4ad7f3fecd15cdacc1b0d3d5eec0b1a
-      size: 1523
-    - path: main.py
-      hash: md5
-      md5: 2f1c8f73b976ac62d088ddcae3e63442
-      size: 2324
-    - path: schema.yaml
-      hash: md5
-      md5: 7b9b414fe4d18cc449c7c0781416a7ac
-      size: 1096
-    - path: src/mlproject/components/component.py
-      hash: md5
-      md5: 36e1512ba46ad6bf53d4c2803d633a2b
-      size: 18850
-    - path: src/mlproject/config/config.py
-      hash: md5
-      md5: 6a4b79cd83a496df723bcb8c92073baf
-      size: 4679
-    - path: src/mlproject/entities/config_entity.py
-      hash: md5
-      md5: 07e32a1a9ca622493f52efc9b22e683b
-      size: 1328
-    outs:
-    - path: artifacts/data_transformation/label_encoders.pkl
-      hash: md5
-      md5: 9a2ca7a98cf212b7ceee6ef5b75f7f82
-      size: 3408
-    - path: artifacts/data_transformation/preprocessor.pkl
-      hash: md5
-      md5: 698e83fe6f68c41f70b4e000aac26a57
-      size: 2872
-    - path: artifacts/data_transformation/test.csv
-      hash: md5
-      md5: 9388e36e54548ab3530affb2765550c4
-      size: 560740
-    - path: artifacts/data_transformation/test_processed.npy
-      hash: md5
-      md5: 92eccebb098881988b3b92f9c90f4312
-      size: 1140128
-    - path: artifacts/data_transformation/train.csv
-      hash: md5
-      md5: 9fcf4b6af9ad4737fb92cac98e258d3f
-      size: 1682042
-    - path: artifacts/data_transformation/train_processed.npy
-      hash: md5
-      md5: 5e31ac44d2d09cd66e2f882c68f25e4b
-      size: 3420128
-  model_trainer:
-    cmd: python main.py --stage model_training
-    deps:
-    - path: artifacts/data_transformation/test_processed.npy
-      hash: md5
-      md5: 92eccebb098881988b3b92f9c90f4312
-      size: 1140128
-    - path: artifacts/data_transformation/train_processed.npy
-      hash: md5
-      md5: 5e31ac44d2d09cd66e2f882c68f25e4b
-      size: 3420128
-    - path: config/config.yaml
-      hash: md5
-      md5: c4ad7f3fecd15cdacc1b0d3d5eec0b1a
-      size: 1523
-    - path: main.py
-      hash: md5
-      md5: 2f1c8f73b976ac62d088ddcae3e63442
-      size: 2324
-    - path: params.yaml
+      md5: 16f00f7c647854f9d0241a09fb078574
+      size: 1306
+    - path: config_file/params.yaml
       hash: md5
       md5: a57779b6ce2584b9f630221bf1d2d185
       size: 402
-    - path: schema.yaml
+    - path: config_file/schema.yaml
       hash: md5
-      md5: 7b9b414fe4d18cc449c7c0781416a7ac
-      size: 1096
-    - path: src/mlproject/components/component.py
+      md5: 9481042344538e679af1fc19cfe316ed
+      size: 1091
+    - path: src/FareFinder/config/data_config.py
       hash: md5
-      md5: a582e3de1f907bdaac234fbe3b1b42ca
-      size: 18832
-    - path: src/mlproject/config/config.py
+      md5: 516486a50c577e1fbf84cf56cd4b689e
+      size: 2972
+    - path: src/FareFinder/pipeline/feature_pipeline.py
       hash: md5
-      md5: 6a4b79cd83a496df723bcb8c92073baf
-      size: 4679
-    - path: src/mlproject/entities/config_entity.py
-      hash: md5
-      md5: 07e32a1a9ca622493f52efc9b22e683b
-      size: 1328
-    params:
-      params.yaml:
-        GradientBoostingRegressor:
-          random_search:
-            n_estimators:
-            - 50
-            - 100
-            - 200
-            learning_rate:
-            - 0.01
-            - 0.1
-            - 0.2
-            max_depth:
-            - 3
-            - 4
-            - 5
-            min_samples_split:
-            - 2
-            - 5
-            - 10
-            min_samples_leaf:
-            - 1
-            - 2
-            - 3
-            - 4
-            subsample:
-            - 0.6
-            - 0.8
-            - 1.0
-          cross_validation:
-            cv_folds: 5
-            scoring: r2
-            n_jobs: -1
-            n_iter: 1
+      md5: c4d92972ee487d056ff13eed66d456c1
+      size: 857
     outs:
-    - path: artifacts/model_trainer/model.joblib
+    - path: artifacts/cleaning/
       hash: md5
-      md5: b381ddf89e072778b042158172399d85
-      size: 389163
-  model_evaluation:
-    cmd: python main.py --stage model_evaluation
+      md5: e84fda45f46630e61043c3c0f9fafc51.dir
+      size: 5182498
+      nfiles: 1
+    - path: artifacts/transformation/label_encoders.pkl
+      hash: md5
+      md5: eccd4d8fd9db225e928aa5a3f28f1120
+      size: 2764
+    - path: artifacts/transformation/preprocessor.pkl
+      hash: md5
+      md5: 417d8e5e1fea17c493a409cf49e4c73c
+      size: 2536
+  model_pipeline:
+    cmd: python main.py --stage model_pipeline
     deps:
-    - path: artifacts/data_transformation/preprocessor.pkl
+    - path: config_file/config.yaml
       hash: md5
-      md5: 698e83fe6f68c41f70b4e000aac26a57
-      size: 2872
-    - path: artifacts/data_transformation/test.csv
-      hash: md5
-      md5: 9388e36e54548ab3530affb2765550c4
-      size: 560740
-    - path: artifacts/model_trainer/model.joblib
-      hash: md5
-      md5: b381ddf89e072778b042158172399d85
-      size: 389163
-    - path: config/config.yaml
-      hash: md5
-      md5: c4ad7f3fecd15cdacc1b0d3d5eec0b1a
-      size: 1523
-    - path: main.py
-      hash: md5
-      md5: 2f1c8f73b976ac62d088ddcae3e63442
-      size: 2324
-    - path: params.yaml
+      md5: 16f00f7c647854f9d0241a09fb078574
+      size: 1306
+    - path: config_file/params.yaml
       hash: md5
       md5: a57779b6ce2584b9f630221bf1d2d185
       size: 402
-    - path: schema.yaml
+    - path: config_file/schema.yaml
       hash: md5
-      md5: 7b9b414fe4d18cc449c7c0781416a7ac
-      size: 1096
-    - path: src/mlproject/components/component.py
+      md5: 9481042344538e679af1fc19cfe316ed
+      size: 1091
+    - path: src/FareFinder/config/model_config.py
       hash: md5
-      md5: 235176e6b71a16a3e659f845f65da59a
-      size: 18814
-    - path: src/mlproject/config/config.py
+      md5: 5c44c00945cf07ef2aafa73d999083ab
+      size: 2334
+    - path: src/FareFinder/pipeline/model_pipeline.py
       hash: md5
-      md5: 6a4b79cd83a496df723bcb8c92073baf
-      size: 4679
-    - path: src/mlproject/entities/config_entity.py
-      hash: md5
-      md5: 07e32a1a9ca622493f52efc9b22e683b
-      size: 1328
+      md5: 46659c2c8cc573d5914c0268c07eda0c
+      size: 726
     outs:
-    - path: artifacts/model_evaluation/metrics.json
+    - path: artifacts/evaluation/metrics.json
       hash: md5
-      md5: 797a0a232813691b659d1bc01835e3fb
-      size: 118
+      md5: 32e4d1c2455b22cbb2f614f4bfac74bf
+      size: 119
+    - path: artifacts/trainer/model.joblib
+      hash: md5
+      md5: e82678ad1bf5a425d4301f64c87ce661
+      size: 149207

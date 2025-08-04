@@ -1,0 +1,55 @@
+columns:
+  Airline: String
+  Source: String
+  Source Name: String 
+  Destination: String
+  Destination Name: String
+  Departure Date & Time: String
+  Arrival Date & Time: String
+  Duration (hrs): Float
+  Stopovers: String
+  Aircraft Type: String
+  Class: String
+  Booking Source: String
+  Base Fare (BDT): Float
+  Tax & Surcharge (BDT): Float
+  Total Fare (BDT): Float
+  Seasonality: String
+  Days Before Departure: Integer
+
+target_column: 
+  name: Total Fare
+
+cleaning:
+  columns_to_drop:
+    - Source Name
+    - Destination Name
+    - Duration (hrs)
+    - Aircraft Type
+    - Base Fare (BDT)
+    - Tax & Surcharge (BDT)
+    - Departure Date & Time  
+    - Arrival Date & Time
+    - Seasonality
+
+  datetime_columns:
+    - Departure Date & Time
+    - Arrival Date & Time
+    
+  target_column_mapping:
+    Total Fare (BDT): Total Fare
+
+categorical_columns:
+  - Airline
+  - Source
+  - Destination
+  - Stopovers
+  - Class
+  - Booking Source
+  - Arrival Time
+  - Departure Time
+
+numeric_columns:
+  - Days Before Departure
+  - Total Fare
+    
