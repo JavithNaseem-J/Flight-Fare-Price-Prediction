@@ -1,4 +1,6 @@
-# ✈️ Flight Fare Price Prediction — End-to-End Machine Learning Pipeline 🚀
+# ✈️ Flight Fare Finder
+
+End-to-End Machine Learning Pipeline 🚀
 
 ---
 
@@ -152,16 +154,6 @@ Workflow file:
 
 ---
 
-## 🌐 FastAPI Deployment
-
-Once running, access your API:
-
-- Home → `http://localhost:8080/`
-- Predict → POST `http://localhost:8080/predict`
-- Results page → `http://localhost:8080/results?prediction=...`
-
----
-
 ## 🧠 Key Highlights
 
 - ✅ End-to-End ML lifecycle pipeline
@@ -171,6 +163,11 @@ Once running, access your API:
 - ✅ Production-grade FastAPI backend
 
 ---
+
+![screencapture-127-0-0-1-8080-2025-08-04-14_05_56](https://github.com/user-attachments/assets/14706d95-7032-4790-8ae2-0f0e169005dc)
+
+
+
 
 ## 📄 License
 
